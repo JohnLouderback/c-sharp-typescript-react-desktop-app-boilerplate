@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "es2015",
+    "noImplicitAny": false,
+    "outDir": "./built/",
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "compileOnSave": false,
+  "include": [
+    "./**/*.ts*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
