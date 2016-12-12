@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using CefSharp;
 using CefSharp.WinForms;
+using CefSharpPlayground.CefHandlers;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 
 namespace CefSharpPlayground {
@@ -19,10 +20,15 @@ namespace CefSharpPlayground {
     #region Properties
     private string StartUrl {
       get {
+#if DEBUG
         var path = System.Reflection.Assembly.GetExecutingAssembly().Location;
         var newPath = Path.GetFullPath(Path.Combine(path, @"..\..\..\..\CefSharpPlayGroundClient\index.html"));
         Debug.WriteLine(newPath);
         return newPath;
+#else
+        return "app://app/index.html";
+#endif
+
       }
     }
     #endregion

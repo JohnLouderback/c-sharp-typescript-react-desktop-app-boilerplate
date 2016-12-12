@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CefSharp;
 using System.Windows.Forms;
+using CefSharpPlayground.CefHandlers;
 using Application = System.Windows.Application;
 
 namespace CefSharpPlayground {
@@ -20,6 +21,10 @@ namespace CefSharpPlayground {
       settings.CefCommandLineArgs.Add("enable-experimental-web-platform-features", "1");
       settings.SetOffScreenRenderingBestPerformanceArgs();
       settings.RemoteDebuggingPort = 8088;
+      settings.RegisterScheme(new CefCustomScheme {
+        SchemeName = AppSchemeHandlerFactory.SchemeName,
+        SchemeHandlerFactory = new AppSchemeHandlerFactory()
+      });
       Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
     }
   }

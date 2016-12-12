@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CefHandlers\AppSchemeHandlerFactory.cs" />
+    <Compile Include="MimeAssistant.cs" />
+    <Compile Include="Utils.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="KeyboardHandler.cs" />
+    <Compile Include="CefHandlers\KeyboardHandler.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -128,8 +131,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CefSharpPlaygroundClient\built\program.js" />
-    <Content Include="CefSharpPlaygroundClient\index.html" />
+    <Resource Include="CefSharpPlaygroundClient\built\program.js" />
+    <Resource Include="CefSharpPlaygroundClient\index.html" />
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

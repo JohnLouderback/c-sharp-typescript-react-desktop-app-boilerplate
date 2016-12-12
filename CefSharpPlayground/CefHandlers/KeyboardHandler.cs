@@ -1,9 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
 using CefSharp;
 
-namespace CefSharpPlayground {
+namespace CefSharpPlayground.CefHandlers {
   public class KeyboardHandler : IKeyboardHandler {
     #region Methods
     public bool OnKeyEvent(IWebBrowser browserControl, IBrowser browser, KeyType type, int windowsKeyCode, int nativeKeyCode, CefEventFlags modifiers,
