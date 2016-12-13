@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:customControls="clr-namespace:CefSharpPlayground.Windows.CustomControls">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="/Windows/Styles/Resources.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+  <Style TargetType="{x:Type customControls:CustomChromeWindow}" x:Key="CustomChromeWindowStyle">
+    <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate
+          TargetType="customControls:CustomChromeWindow">
+          <Border BorderThickness="1"
+                  BorderBrush="{StaticResource WindowBorderColor}"
+                  Background="{StaticResource WindowBackgroundColor}">
+            <Grid x:Name="WindowGrid">
+              <Grid x:Name="CaptionButtons" SnapsToDevicePixels="True">
+                <Grid.Style>
+                  <Style TargetType="Grid">
+                    <Setter Property="Margin" Value="0,0,0,0" />
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding Path=WindowState, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
+                        <Setter Property="Margin" Value="5,5,5,0" />
+                      </DataTrigger>
+                      <DataTrigger Binding="{Binding Path=IsFocused, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="true">
+                        <Setter Property="Opacity" Value="50" />
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </Grid.Style>
+                <TextBlock x:Name="Titletext" Margin="10,4,5,0" TextWrapping="Wrap"
+                           TextOptions.TextFormattingMode="Ideal"
+                           Text="{Binding Path=Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                           VerticalAlignment="Top"
+                           Foreground="{StaticResource Foreground}" TextAlignment="Left" TextOptions.TextHintingMode="Fixed" SnapsToDevicePixels="True" />
+                <customControls:CaptionButton x:Name="closebutton" WindowChrome.IsHitTestVisibleInChrome="True"
+                                              Margin="0,0,0,0"
+                                              BaseImage="pack://application:,,,/Windows/Images/close-button.png"
+                                              HoverImage="pack://application:,,,/Windows/Images/close-button-hover.png"
+                                              HorizontalAlignment="Right" Width="45" Height="29"
+                                              VerticalAlignment="Top">
+                </customControls:CaptionButton>
+                <customControls:CaptionButton x:Name="maximizebutton" WindowChrome.IsHitTestVisibleInChrome="True"
+                                              Margin="0,0,46,0"
+                                              HorizontalAlignment="Right" Width="45" Height="29"
+                                              VerticalAlignment="Top">
+                  <customControls:CaptionButton.Style>
+                    <Style TargetType="customControls:CaptionButton">
+                      <Setter Property="BaseImage" Value="pack://application:,,,/Windows/Images/maximize-button.png" />
+                      <Setter Property="HoverImage" Value="pack://application:,,,/Windows/Images/maximize-button-hover.png" />
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ResizeMode, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="NoResize">
+                          <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=WindowState, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="Maximized">
+                          <Setter Property="BaseImage" Value="pack://application:,,,/Windows/Images/restore-button.png" />
+                          <Setter Property="HoverImage" Value="pack://application:,,,/Windows/Images/restore-button-hover.png" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </customControls:CaptionButton.Style>
+                </customControls:CaptionButton>
+                <customControls:CaptionButton x:Name="minimizebutton" WindowChrome.IsHitTestVisibleInChrome="True"
+                                              Margin="0,0,92,0"
+                                              BaseImage="pack://application:,,,/Windows/Images/minimize-button.png"
+                                              HoverImage="pack://application:,,,/Windows/Images/minimize-button-hover.png"
+                                              HorizontalAlignment="Right" Width="45" Height="29"
+                                              VerticalAlignment="Top">
+                  <customControls:CaptionButton.Style>
+                    <Style TargetType="customControls:CaptionButton">
+                      <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ResizeMode, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Value="NoResize">
+                          <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </customControls:CaptionButton.Style>
+                </customControls:CaptionButton>
+                <Frame HorizontalAlignment="Left" Height="30" Margin="5,0,0,0" VerticalAlignment="Top" Width="441">
+                  <Frame.Content>
+                    <ContentPresenter x:Name="MenuContentPresenter"
+                                      Content="{Binding Path=Menu, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                  </Frame.Content>
+                </Frame>
+              </Grid>
+              <Grid x:Name="ContentGrid">
+                <ContentPresenter />
+              </Grid>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Resources>
+      <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource Foreground}" />
+      </Style>
+    </Style.Resources>
+  </Style>
+</ResourceDictionary>

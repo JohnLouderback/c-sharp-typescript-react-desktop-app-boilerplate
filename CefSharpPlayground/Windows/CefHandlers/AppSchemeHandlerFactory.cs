@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CefSharp;
 
-namespace CefSharpPlayground.CefHandlers {
+namespace CefSharpPlayground.Windows.CefHandlers {
   class AppSchemeHandlerFactory : ISchemeHandlerFactory {
 
     public static string SchemeName => "app";

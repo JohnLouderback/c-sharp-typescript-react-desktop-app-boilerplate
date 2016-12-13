@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CefSharp;
 using System.Windows.Forms;
-using CefSharpPlayground.CefHandlers;
+using CefSharpPlayground.Windows.CefHandlers;
 using Application = System.Windows.Application;
 
 namespace CefSharpPlayground {

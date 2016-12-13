@@ -1,18 +1,21 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using CefSharp;
 using CefSharp.WinForms;
-using CefSharpPlayground.CefHandlers;
+using CefSharpPlayground.Windows.CefHandlers;
+using CefSharpPlayground.Windows.CustomControls;
+using Application = System.Windows.Application;
 using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 
 namespace CefSharpPlayground {
   /// <summary>
   ///   Interaction logic for MainWindow.xaml
   /// </summary>
-  public partial class MainWindow : Window {
+  public partial class MainWindow : CustomChromeWindow {
     #region Fields
     public ChromiumWebBrowser Browser;
     #endregion
@@ -40,6 +43,12 @@ namespace CefSharpPlayground {
     #endregion
 
     #region Methods
+    protected override void OnClosed(EventArgs e) {
+      base.OnClosed(e);
+
+      Application.Current.Shutdown();
+      Process.GetCurrentProcess().Kill();
+    }
 
     // Winform KeyDown Handler
     private void MainWindow_KeyDown(object sender, KeyEventArgs e) {
@@ -63,11 +72,12 @@ namespace CefSharpPlayground {
 
     private void Window_Loaded(object sender, RoutedEventArgs e) {
       Debug.WriteLine("Window Loaded");
-      KeyDown += MainWindow_KeyDown;
+      //KeyDown += MainWindow_KeyDown;
       Browser = new ChromiumWebBrowser(StartUrl);
       Browser.KeyDown += MainWindow_KeyDown;
       Browser.RegisterJsObject("App", new Backend.App());
       Browser.KeyboardHandler = new KeyboardHandler();
+      Browser.BrowserSettings.BackgroundColor = Convert.ToUInt32("FF1D1D1D", 16);
       WfHost.Child = Browser;
     }
     #endregion

@@ -33,6 +33,6 @@ export class Hello extends React.Component<IHelloProps, IHelloState> {
   }
 
   public render() {
-    return <h1 onClick={this.clickHandler}>Hello from {this.props.compiler} and {this.props.framework}! The time is {this.state.time}.</h1>;
+    return <p onClick={this.clickHandler}>Hello from {this.props.compiler} and {this.props.framework}! The time is {this.state.time}.</p>;
   }
 }

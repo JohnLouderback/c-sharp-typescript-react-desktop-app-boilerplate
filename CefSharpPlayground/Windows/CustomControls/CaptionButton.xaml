@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="CefSharpPlayground.Windows.CustomControls.CaptionButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="uc">
+  <UserControl.Resources>
+    <Style TargetType="{x:Type Image}" x:Key="HoverStyle">
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+          <Trigger.EnterActions>
+            <BeginStoryboard>
+              <Storyboard>
+                <DoubleAnimation From="0" To="1" Duration="00:00:00.15" Storyboard.TargetProperty="Opacity" />
+              </Storyboard>
+            </BeginStoryboard>
+          </Trigger.EnterActions>
+          <Trigger.ExitActions>
+            <BeginStoryboard>
+              <Storyboard>
+                <DoubleAnimation To="0" Duration="00:00:00.15" Storyboard.TargetProperty="Opacity" />
+              </Storyboard>
+            </BeginStoryboard>
+          </Trigger.ExitActions>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </UserControl.Resources>
+  <Grid>
+    <Image x:Name="image" HorizontalAlignment="Center" VerticalAlignment="Center"
+           Source="{Binding Path=BaseImage, ElementName=uc}" />
+    <Image Style="{StaticResource HoverStyle}" x:Name="image1" HorizontalAlignment="Center" VerticalAlignment="Center"
+           Source="{Binding Path=HoverImage, ElementName=uc}" Opacity="0" />
+
+  </Grid>
+</UserControl>
